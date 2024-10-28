@@ -1,0 +1,86 @@
+#include <stdio.h>
+
+int convertDecimalToBinary(int dec)
+{
+
+    if (dec == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return (dec % 2) + 10 * convertDecimalToBinary(dec / 2);
+    }
+}
+
+int convertBinarytoDecimal(int bin, int t, int c)
+{
+    // 101010 to 21
+    if (bin > 0)
+    {
+        t += (bin % 10) * c;
+        return convertBinarytoDecimal(bin / 10, t, c * 2);
+    }
+    else
+    {
+        return t;
+    }
+}
+
+
+
+
+int choice()
+{
+    // taking user choice
+    int userChoice;
+    printf("\n Please type your choice ");
+    printf("\n Type 1 for Binary to Decimal \n Type 2 for Decimal to Binary \n Type 3 for Decimal to HexaDecimal \n");
+    scanf("%d", &userChoice);
+    return userChoice;
+}
+
+void intro()
+{
+
+    printf("\n Program for Base Conversion\n ");
+    printf("\n Steps to convert number \n 1. Enter your choice  \n 2. Type your number \n 3. Converted number will be printed.\n");
+}
+
+void callingFunctions(int userChoice)
+{
+    int num, dec, bin;
+    
+    switch (userChoice)
+    {
+    case 1:
+
+        printf("\n Type a Binary number: ");
+        scanf("%d", &num);
+        dec = convertBinarytoDecimal(num, 0, 1);
+        printf("Decimal number is :%d ", dec);
+        break;
+    case 2:
+        printf("\n Type a Decimal number: ");
+        scanf("%d", &num);
+        bin = convertDecimalToBinary(num);
+        printf("Binary number is :%d ", bin);
+        break;
+    default:
+        printf("Error!");
+        break;
+    }
+}
+
+int main()
+{
+
+    intro();
+
+    int userChoice = choice();
+    printf(" Entered Choice is %d ", userChoice);
+
+    callingFunctions(userChoice);
+
+    return 0;
+}
